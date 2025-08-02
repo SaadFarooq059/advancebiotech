@@ -27,13 +27,31 @@ import Testimonials from '@/components/Testimonials';
 import { BouncyCardsFeatures } from '@/components/ui/bounce-card-features';
 import InteractiveBentoGallery from '@/components/ui/interactive-bento-gallery';
 import AboutUsSection from '@/components/ui/about-us-section';
+import { useState, useEffect } from 'react';
 
-// Dynamic imports for client-side only components
-const BackgroundAnimation = dynamic(() => import('@/components/hero/BackgroundAnimation'), { ssr: false });
-const FloatingStats = dynamic(() => import('@/components/hero/FloatingStats'), { ssr: false });
-const DecorativeElements = dynamic(() => import('@/components/hero/DecorativeElements'), { ssr: false });
+// Dynamic imports with loading fallbacks
+const BackgroundAnimation = dynamic(() => import('@/components/hero/BackgroundAnimation'), { 
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-green-50" />
+});
+
+const FloatingStats = dynamic(() => import('@/components/hero/FloatingStats'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-20" />
+});
+
+const DecorativeElements = dynamic(() => import('@/components/hero/DecorativeElements'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-10" />
+});
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const services = [
     {
       icon: <Microscope className="h-8 w-8 text-purple-600" />,
@@ -202,17 +220,31 @@ export default function Home() {
     }
   ];
 
+  // Don't render until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-green-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section - Fixed */}
       <section className="relative min-h-screen overflow-hidden">
-        {/* Animated Background */}
-        {/* <div className="absolute inset-0">
-          <BackgroundAnimation />
-        </div> */}
-        
-        {/* Gradient Background */}
+        {/* Static Background - Always visible */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-green-50"></div>
+        
+        {/* Dynamic Background - Only loads on client */}
+        {isClient && (
+          <div className="absolute inset-0">
+            <BackgroundAnimation />
+          </div>
+        )}
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative z-10 min-h-screen flex items-center">
@@ -222,44 +254,44 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-              <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 mb-4">
-                Serving Healthcare Since 2018
-              </Badge>
-              <motion.h1 
-                className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                Leading{" "}
-                <motion.span 
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.6 }}
+                <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 mb-4">
+                  Serving Healthcare Since 2018
+                </Badge>
+                <motion.h1 
+                  className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  Pharmaceutical
-                </motion.span>{" "}
-                Supplier in Pakistan
-              </motion.h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Advance Biotech delivers high-quality pharmaceutical products and healthcare solutions 
-                to hospitals, clinics, and pharmacies across Pakistan with reliability and excellence.
-              </p>
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-              >
-                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 shadow-lg hover:shadow-xl transition-shadow">
-                  Get Quote Now
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button size="lg" variant="outline" className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
-                  View Our Services
-                </Button>
-              </motion.div>
+                  Leading{" "}
+                  <motion.span 
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.6 }}
+                  >
+                    Pharmaceutical
+                  </motion.span>{" "}
+                  Supplier in Pakistan
+                </motion.h1>
+                <p className="text-xl text-gray-600 mb-8">
+                  Advance Biotech delivers high-quality pharmaceutical products and healthcare solutions 
+                  to hospitals, clinics, and pharmacies across Pakistan with reliability and excellence.
+                </p>
+                <motion.div 
+                  className="flex flex-col sm:flex-row gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                >
+                  <Button size="lg" className="bg-purple-600 hover:bg-purple-700 shadow-lg hover:shadow-xl transition-shadow">
+                    Get Quote Now
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
+                    View Our Services
+                  </Button>
+                </motion.div>
               </motion.div>
               
               {/* Right side - Professional Image */}
@@ -282,27 +314,36 @@ export default function Home() {
                       width={800}
                       height={500}
                       className="w-full h-96 lg:h-[500px] object-cover"
+                      priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-purple-600/20 to-transparent"></div>
                   </motion.div>
                   
-                  {/* Floating Stats Cards */}
-                  <FloatingStats />
+                  {/* Floating Stats Cards - Only render on client */}
+                  {isClient && <FloatingStats />}
                   
-                  {/* Decorative Elements */}
-                  <DecorativeElements />
+                  {/* Decorative Elements - Only render on client */}
+                  {isClient && <DecorativeElements />}
                 </div>
               </motion.div>
             </div>
-                  </div>
-                </div>
+          </div>
+        </div>
       </section>
 
-      {/* About Section */}
-      <AboutUsSection />
+      {/* About Section - Wrapped in client check */}
+      {isClient && (
+        <section className="py-20">
+          <AboutUsSection />
+        </section>
+      )}
 
-      {/* Services Section */}
-      <BouncyCardsFeatures />
+      {/* Services Section - Wrapped in client check */}
+      {isClient && (
+        <section className="py-20">
+          <BouncyCardsFeatures />
+        </section>
+      )}
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-white">
@@ -320,8 +361,15 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Only render parallax on client */}
             <div className="h-[800px] overflow-hidden">
-              <CardsParallax items={whyChooseUsCards} />
+              {isClient ? (
+                <CardsParallax items={whyChooseUsCards} />
+              ) : (
+                <div className="h-full bg-purple-50 rounded-xl flex items-center justify-center">
+                  <p className="text-purple-600">Loading cards...</p>
+                </div>
+              )}
             </div>
             <div className="relative">
               <Card className="p-8 bg-gradient-to-br from-purple-50 to-white">
@@ -376,11 +424,27 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <InteractiveBentoGallery
-          mediaItems={expertiseItems}
-          title=""
-          description=""
-        />
+        {/* Only render Bento Gallery on client */}
+        {isClient ? (
+          <InteractiveBentoGallery
+            mediaItems={expertiseItems}
+            title=""
+            description=""
+          />
+        ) : (
+          <div className="max-w-4xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
+              {expertiseItems.map((item, index) => (
+                <div key={item.id} className="bg-purple-50 rounded-xl p-4 flex items-center justify-center">
+                  <div className="text-center">
+                    <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-sm text-gray-600">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* FAQ Section */}
@@ -450,7 +514,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <Testimonials />
+      {isClient && <Testimonials />}
 
       {/* CTA Section */}
       <section className="py-20 bg-white">
@@ -460,7 +524,7 @@ export default function Home() {
             <div className="relative">
               <div className="bg-purple-50 rounded-3xl p-8 overflow-hidden">
                 <Image 
-                  src="cta.jpg" 
+                  src="/cta.jpg" 
                   alt="Pharmaceutical professional" 
                   width={800}
                   height={384}
