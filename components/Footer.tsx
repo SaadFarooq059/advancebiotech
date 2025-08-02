@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, MapPin, Clock, ArrowRight, Heart, Shield, Award, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,7 +21,6 @@ export default function Footer() {
     { name: 'Healthcare Consultation', href: '/services' }
   ];
 
-  // Update achievements icons
   const achievements = [
     { icon: <Award className="h-5 w-5 text-purple-400" />, text: "6+ Years Experience" },
     { icon: <Users className="h-5 w-5 text-green-400" />, text: "500+ Happy Clients" },
@@ -30,7 +30,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
-      {/* Background Elements - Updated to purple/green */}
+      {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
@@ -41,17 +41,22 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             
-            {/* Company Info - Updated colors */}
+            {/* Company Info with Logo */}
             <div className="lg:col-span-2">
               <div className="mb-8">
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-xl">A</span>
-                  </div>
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-green-400 bg-clip-text text-transparent">
-                    Advance Biotech
-                  </h3>
+                {/* Logo Section */}
+                <div className="flex items-center mb-6">
+                  <Link href="/" className="block">
+                    <Image
+                      src="/logo.png"
+                      alt="Advance Biotech Logo"
+                      width={200}
+                      height={80}
+                      className="h-16 w-auto object-contain hover:scale-105 transition-transform duration-200"
+                    />
+                  </Link>
                 </div>
+                
                 <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">
                   Leading pharmaceutical supplier in Pakistan, committed to providing
                   high-quality healthcare solutions since 2018. We bridge the gap between
@@ -70,7 +75,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Quick Links - Updated accent color */}
+            {/* Quick Links */}
             <div>
               <h4 className="text-xl font-bold text-white mb-8 flex items-center">
                 <div className="w-2 h-8 bg-gradient-to-b from-purple-400 to-purple-600 rounded-full mr-3"></div>
@@ -91,7 +96,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* Services - Updated accent color */}
+            {/* Services */}
             <div>
               <h4 className="text-xl font-bold text-white mb-8 flex items-center">
                 <div className="w-2 h-8 bg-gradient-to-b from-green-400 to-green-600 rounded-full mr-3"></div>
@@ -113,7 +118,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact Information Cards - Updated to purple/green */}
+          {/* Contact Information Cards */}
           <div className="mt-16 pt-12 border-t border-white/10">
             <div className="text-center mb-12">
               <h3 className="text-2xl font-bold text-white mb-4">Get in Touch</h3>
@@ -121,7 +126,7 @@ export default function Footer() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Phone - Purple */}
+              {/* Phone */}
               <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 group">
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -132,7 +137,7 @@ export default function Footer() {
                 </CardContent>
               </Card>
 
-              {/* Email - Green */}
+              {/* Email */}
               <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 group">
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -143,7 +148,7 @@ export default function Footer() {
                 </CardContent>
               </Card>
 
-              {/* Location - Purple */}
+              {/* Location */}
               <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 group">
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -154,7 +159,7 @@ export default function Footer() {
                 </CardContent>
               </Card>
 
-              {/* Hours - Green */}
+              {/* Since */}
               <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 group">
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -167,7 +172,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* CTA Section - Updated buttons */}
+          {/* CTA Section */}
           <div className="mt-16 pt-12 border-t border-white/10">
             <div className="text-center">
               <h3 className="text-2xl font-bold text-white mb-4">
@@ -192,14 +197,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar - Updated logo */}
+        {/* Bottom Bar with Logo */}
         <div className="border-t border-white/10 bg-black/20 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-green-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">A</span>
-                </div>
+              <div className="flex items-center space-x-4">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Advance Biotech Logo"
+                  width={80}
+                  height={32}
+                  className="h-8 w-auto object-contain"
+                />
                 <p className="text-gray-400">
                   © 2024 Advance Biotech. All rights reserved.
                 </p>
