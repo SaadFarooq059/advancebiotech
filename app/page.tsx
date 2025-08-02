@@ -331,16 +331,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section - Wrapped in client check */}
+      {/* About Section - Consistent background */}
       {isClient && (
-        <section className="py-20">
+        <section className="py-20 bg-white">
           <AboutUsSection />
         </section>
       )}
 
-      {/* Services Section - Wrapped in client check */}
+      {/* Services Section - Consistent background */}
       {isClient && (
-        <section className="py-20">
+        <section className="py-20 bg-gradient-to-br from-purple-50 to-green-50">
           <BouncyCardsFeatures />
         </section>
       )}
@@ -410,7 +410,7 @@ export default function Home() {
       </section>
 
       {/* Expertise Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-white">
+      <section className="py-20 bg-gradient-to-br from-green-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="text-center">
             <Badge className="bg-green-100 text-green-800 hover:bg-green-200 mb-4">
@@ -435,7 +435,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
               {expertiseItems.map((item, index) => (
-                <div key={item.id} className="bg-purple-50 rounded-xl p-4 flex items-center justify-center">
+                <div key={item.id} className="bg-white rounded-xl p-4 flex items-center justify-center shadow-sm">
                   <div className="text-center">
                     <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
                     <p className="text-sm text-gray-600">{item.desc}</p>
@@ -448,7 +448,7 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge className="bg-green-100 text-green-800 hover:bg-green-200 mb-4">
@@ -466,7 +466,7 @@ export default function Home() {
             <div>
               <Accordion type="single" collapsible className="space-y-4">
                 {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg border border-purple-100">
+                  <AccordionItem key={index} value={`item-${index}`} className="bg-gray-50 rounded-lg border border-purple-100">
                     <AccordionTrigger className="px-6 py-4 text-left font-semibold text-gray-900 hover:text-purple-600">
                       {faq.question}
                     </AccordionTrigger>
@@ -514,7 +514,11 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      {isClient && <Testimonials />}
+      {isClient && (
+        <section className="py-20 bg-gradient-to-br from-purple-50 to-green-50">
+          <Testimonials />
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 bg-white">
