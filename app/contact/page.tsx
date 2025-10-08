@@ -65,7 +65,7 @@ export default function Contact() {
     {
       icon: <Phone className="h-12 w-12 text-purple-600" />,
       title: "Phone Number",
-      details: "0335 5359327",
+      details: "+92 333 5395327",
       description: "Call us for immediate assistance",
       gradient: "from-blue-50 to-purple-50"
     },
@@ -303,7 +303,7 @@ export default function Contact() {
                     </div>
                     <div className="flex items-center space-x-3 p-4 bg-white rounded-xl shadow-sm">
                       <Phone className="h-5 w-5 text-green-600" />
-                      <span className="text-gray-700 font-medium">0335 5359327</span>
+                      <span className="text-gray-700 font-medium">+92 333 5395327</span>
                     </div>
                   </div>
                 </CardContent>

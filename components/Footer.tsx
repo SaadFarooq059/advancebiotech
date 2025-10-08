@@ -133,7 +133,7 @@ export default function Footer() {
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <h4 className="text-white font-semibold mb-2">Call Us</h4>
-                  <p className="text-purple-400 font-medium">0335 5359327</p>
+                  <p className="text-purple-400 font-medium">+92 333 5395327</p>
                 </CardContent>
               </Card>
 
