@@ -72,7 +72,7 @@ export default function Contact() {
     {
       icon: <Mail className="h-12 w-12 text-green-600" />,
       title: "Email Address",
-      details: "info@advancebiotech.net\nmudassar@advancebiotech.net",
+      details: "info@advancebiotech.net\nws@advancebiotech.net",
       description: "Send us your queries anytime",
       gradient: "from-green-50 to-purple-50"
     },
