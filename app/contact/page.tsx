@@ -286,8 +286,8 @@ export default function Contact() {
                       <User className="h-12 w-12 text-purple-600" />
                     </div>
                     <div>
-                      <CardTitle className="text-2xl text-gray-900">Mudassar Saghir</CardTitle>
-                      <p className="text-purple-600 font-medium text-lg">Chief Executive Officer</p>
+                      <CardTitle className="text-2xl text-gray-900">Wajid Saeed</CardTitle>
+                      <p className="text-purple-600 font-medium text-lg">Director</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -299,7 +299,7 @@ export default function Contact() {
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3 p-4 bg-white rounded-xl shadow-sm">
                       <Mail className="h-5 w-5 text-purple-600" />
-                      <span className="text-gray-700 font-medium">mudassar@advancebiotech.net</span>
+                      <span className="text-gray-700 font-medium">ws@advancebiotech.net</span>
                     </div>
                     <div className="flex items-center space-x-3 p-4 bg-white rounded-xl shadow-sm">
                       <Phone className="h-5 w-5 text-green-600" />
